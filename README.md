@@ -18,9 +18,13 @@ the first time will take a while
 
 4. create the following columns in 'destinations'
 >'id' int, primary key, auto increment
+
 >'name' varchar(50)
+
 >'actual_quantity' int
+
 >'target_quantity' int
+
 >'routeID' int
 
 5. populate destinations
