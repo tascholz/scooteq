@@ -28,7 +28,7 @@ class Container
             'pdo' => function() {
                 try {
                     $pdo = new PDO(
-                        'mysql:host=test_mysql_1;dbname=scooteq;charset=utf8',
+                        'mysql:host=scoot-dev_mysql_1;dbname=scooteq;charset=utf8',
                         'root',
                         'secret'
                     );

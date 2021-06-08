@@ -3,6 +3,7 @@
 namespace App\Route;
 
 use App\Core\AbstractController;
+use PDO;
 
 class RouteController extends AbstractController{
     public function __construct(
@@ -79,6 +80,47 @@ class RouteController extends AbstractController{
             return $o->$prop;
         },
         $array));
+    }
+
+    public function setupDatabase() {
+        $pdo = new PDO(
+            'mysql:host=scoot-dev_mysql_1;dbname=scooteq;charset=utf8',
+            'root',
+            'secret'
+        );
+        $stmt = $pdo->query("SHOW TABLES LIKE 'destinations'");
+        //$stmt->execute();
+        $result = $stmt->fetchAll();
+        if(empty($result)){
+            $stmt = $pdo->query("CREATE TABLE destinations (
+                id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(50),
+                actual_quantity INT,
+                target_quantity INT,
+                routeID INT)
+                ");
+            $stmt->execute();
+
+            $this->populate();
+        
+            
+        }
+        else {
+            echo 'database already built';
+        }
+    }
+
+    function populate(){
+        $pdo = new PDO(
+            'mysql:host=scoot-dev_mysql_1;dbname=scooteq;charset=utf8',
+            'root',
+            'secret'
+        );
+        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('HH Mitte',1,3,1);");
+        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('Veddel',4,2,2);");
+        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('Heimfeld',5,3,2);");
+        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('Wilhelmsburg',4,7,2);");
+
     }
 
 

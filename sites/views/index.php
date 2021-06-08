@@ -1,7 +1,7 @@
 <?php include("template.php");?>
 <h1>Index</h1>
-<button>
+<a href="./populate">
     populate database
-</button>
+</a>
 
 <?php 

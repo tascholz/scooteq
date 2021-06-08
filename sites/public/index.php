@@ -12,6 +12,10 @@ $routes = [
     '/routes' => [
         'controller' => 'routeController',
         'method' => 'routes'
+    ],
+    '/populate' => [
+        'controller' => 'routeController',
+        'method' => 'setupDatabase'
     ]
 ];
 
