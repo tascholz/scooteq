@@ -6,6 +6,7 @@ use App\Route\DestinationRepository;
 use PDO;
 use PDOException;
 use App\Route\RouteController;
+use App\Core\SetupController;
 
 class Container
 {
@@ -15,6 +16,12 @@ class Container
     public function __construct()
     {
         $this->receipts = [
+            'setupController' => function() {
+                return new SetupController();
+            },
+            'indexController' => function() {
+                return new IndexController();
+            },
             'routeController' => function() {
                 return new RouteController(
                     $this->make('destinationRepository')
