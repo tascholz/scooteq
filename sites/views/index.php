@@ -1,11 +1,15 @@
 <?php include("template.php");?>
-<h1>Index</h1>
-<a href="./populate">
-    populate database
-</a>
+<div class='container'>
+    <div class="row pt-2 d-flex justify-content-center">
+        <div class="col-4">
+        <h1>Index</h1>
+        <a href="./setup">
+            <button class='btn btn-primary'>
+                populate database
+            </button>
+        </a>
+        </div>
+    </div>
+</div>
 
 <?php 
-
-//button ./populate , dann database wurde aufgebaut
-
-//

@@ -6,7 +6,7 @@ $pathInfo = $_SERVER['PATH_INFO'];
 
 $routes = [
     '/' => [
-        'controller' => 'routeController',
+        'controller' => 'indexController',
         'method' => 'index'
     ],
     '/routes' => [
@@ -15,6 +15,10 @@ $routes = [
     ],
     '/populate' => [
         'controller' => 'routeController',
+        'method' => 'setupDatabase'
+    ],
+    '/setup' => [
+        'controller' => 'setupController',
         'method' => 'setupDatabase'
     ]
 ];

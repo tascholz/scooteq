@@ -1,18 +1,14 @@
 <?php include("template.php");?>
 
-
-
-
-
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col">
+    <div class="row pt-2 d-flex justify-content-center">
+        <div class="col-4">
             <h1>Routenplaner</h1>
         </div>
     </div>
 
-    <div class="row justify-content-center">    
-        <div class="col">
+    <div class="row pt-2 d-flex justify-content-center"> 
+        <div class="col-4">
             <?php
                 foreach($routes as $key => $route){
                     ?>
@@ -27,7 +23,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row pt-2 d-flex justify-content-center">
         <div class="col">
             <div id="test"></div>
         </div>
