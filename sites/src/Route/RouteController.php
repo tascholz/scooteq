@@ -13,7 +13,8 @@ class RouteController extends AbstractController{
         $this->destinationRepository = $destinationRepository;
     }
 
-    public function index(){
+    public function index()
+    {
         $this->render("index", []);
     }
 
@@ -38,16 +39,8 @@ class RouteController extends AbstractController{
 
     private function buildRoutes($destinations)
     {
-        //$this->sortDestinations($destinations);
-        usort($destinations, function($a, $b)
-            {
-                if ($a->diff == $b->diff) {
-                    return 0;
-                }
-                return ($a->diff > $b->diff) ? -1 : 1;
-            });
+        $this->sortDestinations($destinations);
         
-
         $routes = array();
         $x = 0;
         $y = $this->max_attribute_in_array($destinations, "routeID");
@@ -65,7 +58,16 @@ class RouteController extends AbstractController{
         return $routes;   
     }
 
-    private function sortDestinations($destinations){
+    private function max_attribute_in_array($array, $prop) 
+    {
+        return max(array_map(function($o) use($prop){
+            return $o->$prop;
+        },
+        $array));
+    }
+
+    private function sortDestinations($destinations)
+    {
         usort($destinations, function($a, $b)
             {
                 if ($a->diff == $b->diff) {
@@ -74,55 +76,5 @@ class RouteController extends AbstractController{
                 return ($a->diff > $b->diff) ? -1 : 1;
             });
     }
-
-    private function max_attribute_in_array($array, $prop) {
-        return max(array_map(function($o) use($prop){
-            return $o->$prop;
-        },
-        $array));
-    }
-
-    public function setupDatabase() {
-        $pdo = new PDO(
-            'mysql:host=scoot-dev_mysql_1;dbname=scooteq;charset=utf8',
-            'root',
-            'secret'
-        );
-        $stmt = $pdo->query("SHOW TABLES LIKE 'destinations'");
-        //$stmt->execute();
-        $result = $stmt->fetchAll();
-        if(empty($result)){
-            $stmt = $pdo->query("CREATE TABLE destinations (
-                id INT PRIMARY KEY AUTO_INCREMENT,
-                name VARCHAR(50),
-                actual_quantity INT,
-                target_quantity INT,
-                routeID INT)
-                ");
-            $stmt->execute();
-
-            $this->populate();
-        
-            
-        }
-        else {
-            echo 'database already built';
-        }
-    }
-
-    function populate(){
-        $pdo = new PDO(
-            'mysql:host=scoot-dev_mysql_1;dbname=scooteq;charset=utf8',
-            'root',
-            'secret'
-        );
-        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('HH Mitte',1,3,1);");
-        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('Veddel',4,2,2);");
-        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('Heimfeld',5,3,2);");
-        $stmt = $pdo->query("INSERT INTO `destinations` (`name`,`actual_quantity`,`target_quantity`,`routeID`) VALUES ('Wilhelmsburg',4,7,2);");
-
-    }
-
-
 }
     

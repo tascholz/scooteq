@@ -1,7 +1,6 @@
 <?php include("template.php");?>
 <?php include("javascript.js");?>
 
-
 <div class="container">
     <div class="row pt-2 d-flex justify-content-center">
         <div class="col-4">
